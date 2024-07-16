@@ -1,32 +1,81 @@
-name: Testing Pipeline
+# name: Testing Pipeline
+
+# on:
+#   push:
+#     branches:
+#       - main  # Replace with your main branch name
+#   pull_request:
+#     branches:
+#       - main  # Replace with your main branch name
+
+# jobs:
+#   build-and-test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       # You can add steps here to install dependencies, build your code, and run tests
+#       # Example:
+#       # - name: Install dependencies
+#       #   run: npm install
+
+#       # - name: Build code
+#       #   run: npm run build
+
+#       # - name: Run tests
+#       #   run: npm test
+
+#       # Example placeholder step to ensure no errors occur
+#       - name: Ensure no errors
+#         run: echo "No errors found!"
+
+#       # Add more steps as needed based on your specific project requirements
+
+
+name: Testing and Deployment Pipeline
 
 on:
   push:
     branches:
       - main  # Replace with your main branch name
-  pull_request:
-    branches:
-      - main  # Replace with your main branch name
 
 jobs:
-  build-and-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # You can add steps here to install dependencies, build your code, and run tests
-      # Example:
-      # - name: Install dependencies
-      #   run: npm install
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Set your Node.js version here
 
-      # - name: Build code
-      #   run: npm run build
+      - name: Install dependencies
+        run: npm install
 
+      - name: Build project
+        run: npm run build  # Replace with your build command if different
+
+      # Example deployment step (replace with actual deployment commands)
+      - name: Deploy to staging
+        run: |
+          echo "Deploying to staging environment..."
+          # Add your deployment commands here, e.g., deploying to a server or cloud platform
+
+      # Optional: Run tests if applicable
       # - name: Run tests
       #   run: npm test
 
-      # Example placeholder step to ensure no errors occur
+      # Optional: Additional deployment steps
+      # - name: Deploy to production
+      #   if: success()
+      #   run: |
+      #     echo "Deploying to production environment..."
+      #     # Add your production deployment commands here
+
+      # Example placeholder step to ensure no errors
       - name: Ensure no errors
         run: echo "No errors found!"
 
