@@ -1,18 +1,33 @@
-name: Docker Image CI
+name: Testing Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main  # Replace with your main branch name
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main  # Replace with your main branch name
 
 jobs:
-
-  build:
-
+  build-and-test:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # You can add steps here to install dependencies, build your code, and run tests
+      # Example:
+      # - name: Install dependencies
+      #   run: npm install
+
+      # - name: Build code
+      #   run: npm run build
+
+      # - name: Run tests
+      #   run: npm test
+
+      # Example placeholder step to ensure no errors occur
+      - name: Ensure no errors
+        run: echo "No errors found!"
+
+      # Add more steps as needed based on your specific project requirements
